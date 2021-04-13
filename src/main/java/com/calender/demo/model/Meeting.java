@@ -16,14 +16,16 @@ public class Meeting implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long meetingId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "admin_user_Id")
     private User admin;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "slot_Id")
     private Slot slot;
 
-    @OneToMany(cascade = CascadeType.REFRESH)
-    private List<User> userList = new ArrayList<>();
+    @ManyToMany
+    private List<User> participants = new ArrayList<>();
 
 
     public Long getMeetingId() {
@@ -50,13 +52,11 @@ public class Meeting implements Serializable {
         this.slot = slot;
     }
 
-    public List<User> getUserList() {
-        return userList;
+    public List<User> getParticipants() {
+        return participants;
     }
 
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
+    public void setParticipants(List<User> participants) {
+        this.participants = participants;
     }
-
-
 }

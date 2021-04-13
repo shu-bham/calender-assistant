@@ -2,13 +2,12 @@ package com.calender.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -24,6 +23,18 @@ public class Slot implements Serializable {
     private Time startTime;
 
     private Time endTime;
+
+    @OneToMany(mappedBy = "slot")
+    @JsonIgnore
+    private List<Meeting> meetings = new ArrayList<>();
+
+    public List<Meeting> getMeetings() {
+        return meetings;
+    }
+
+    public void setMeetings(List<Meeting> meetings) {
+        this.meetings = meetings;
+    }
 
     public Long getSlotId() {
         return slotId;
