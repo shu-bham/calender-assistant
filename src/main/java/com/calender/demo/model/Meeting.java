@@ -21,7 +21,6 @@ public class Meeting implements Serializable {
     private User admin;
 
     @ManyToOne
-    @JoinColumn(name = "slot_Id")
     private Slot slot;
 
     @ManyToMany
