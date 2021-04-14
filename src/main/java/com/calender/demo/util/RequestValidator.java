@@ -3,6 +3,7 @@ package com.calender.demo.util;
 import com.calender.demo.model.Slot;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.Optional;
 
 public final class RequestValidator {
@@ -11,14 +12,15 @@ public final class RequestValidator {
         long millis = System.currentTimeMillis();
         Date now = new Date(millis);
         Date currDate = new Date(now.getYear(), now.getMonth(), now.getDate());
+        Time currTime = new Time(now.getTime() - 900000); // currTime - 15min
 
 
         if (currDate.compareTo(s.getDate()) > 0) {
             return Optional.of("Input Date is Invalid");
         }
 
-        if (!s.getStartTime().before(s.getEndTime())) {
-            return Optional.of("Start Time can't be more than End Time");
+        if (!(currTime.before(s.getStartTime()) && s.getStartTime().before(s.getEndTime()))) {
+            return Optional.of("Invalid Time");
         }
 
         return Optional.empty();

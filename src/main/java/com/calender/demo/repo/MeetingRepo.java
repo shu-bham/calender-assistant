@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MeetingRepo extends CrudRepository<Meeting, Long> {
+public interface MeetingRepo extends CrudRepository<Meeting, Long>, MeetingRepoCustom {
 }
