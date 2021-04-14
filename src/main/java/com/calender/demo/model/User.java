@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,6 +20,19 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "admin")
     @JsonIgnore
     private List<Meeting> ownMeeting = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "participants")
+    @JsonIgnore
+    private List<Meeting> participatingMeetings = new ArrayList<>();
+
+
+    public List<Meeting> getParticipatingMeetings() {
+        return participatingMeetings;
+    }
+
+    public void setParticipatingMeetings(List<Meeting> participatingMeetings) {
+        this.participatingMeetings = participatingMeetings;
+    }
 
     public List<Meeting> getOwnMeeting() {
         return ownMeeting;

@@ -13,6 +13,7 @@ public final class RequestValidator {
         Date now = new Date(millis);
         Date currDate = new Date(now.getYear(), now.getMonth(), now.getDate());
         Time currTime = new Time(now.getTime() - 900000); // currTime - 15min
+        currTime = new Time(currTime.getHours(), currTime.getMinutes(), currTime.getSeconds());
 
 
         if (currDate.compareTo(s.getDate()) > 0) {
